@@ -45,7 +45,7 @@ pinout:
   uio[0]: "in[0]/addr[6]"
   uio[1]: "in[1]/addr[7]"
   uio[2]: "in[2]/addr[8]"
-  uio[3]: "in[3]"
+  uio[3]: "in[3]/addr[9]"
   uio[4]: "in[4]"
   uio[5]: "in[5]"
   uio[6]: "in[6]"

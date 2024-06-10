@@ -16,14 +16,14 @@ module tt_um_collosal_demo (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  reg [7:0] mem[511:0];
+  reg [7:0] mem[799:0];
 
-  reg [2:0] addr_high_reg;
+  reg [3:0] addr_high_reg;
   wire we = ui_in[7];
   wire bank_select = ui_in[6];
   wire [5:0] addr_low = ui_in[5:0];
-  wire [2:0] addr_high_in = uio_in[2:0];
-  wire [8:0] addr = {bank_select ? addr_high_in : addr_high_reg, addr_low};
+  wire [3:0] addr_high_in = uio_in[3:0];
+  wire [9:0] addr = {bank_select ? addr_high_in : addr_high_reg, addr_low};
 
   assign uio_oe  = 8'b0;  // All bidirectional IOs are inputs
   assign uio_out = 8'b0;
@@ -36,10 +36,15 @@ module tt_um_collosal_demo (
       if (bank_select) begin
         addr_high_reg <= addr_high_in;
       end
-      if (we) begin
-        mem[addr] <= uio_in;
+      if (addr < 800) begin
+        if (we) begin
+          mem[addr] <= uio_in;
+        end
+        uo_out <= mem[addr];
+      end else
+      begin
+        uo_out <= 8'b0;
       end
-      uo_out <= mem[addr];
     end
   end
 

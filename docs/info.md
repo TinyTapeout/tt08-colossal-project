@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-This is a 4 kbit (512 byte) RAM module. It allows reading or writing a single byte at a time. There are 9 address lines, 8 data lines, and 1 write enable line. 
+This is a 6400 bit (800 byte) RAM module. It allows reading or writing a single byte at a time. There are 10 address lines, 8 data lines, and 1 write enable line. 
 
 To read a byte, set the write enable line (wen) to 0, and the data lines (ou_out[7:0]) will be set to the value of the 
 byte at the address specified by the address lines (addr[5:0]).
@@ -18,7 +18,7 @@ To write a byte, set the write enable line (wen) to 1, and set the data lines (u
 
 The lower 6 address bits (addr[5:0]) are exposed as input pins. 
 
-The upper 3 address lines are stored in the address_bank register. To change the upper 3 address bits, set the bank_sel line to 1, and set the data lines (addr[8:6]) to the desired value.
+The upper 4 address lines are stored in the address_bank register. To change the upper 4 address bits, set the bank_sel line to 1, and set the data lines (addr[9:6]) to the desired value.
 
 ## How to test
 
@@ -26,7 +26,7 @@ The upper 3 address lines are stored in the address_bank register. To change the
 the clock line. The value at the specified address should be updated to the value of in[7:0].
 2. Set addr[5:0] to the desired address, set wen to 0, and set bank_sel to 0, then pulse the clock line. The value at the specified
 address should be output on out[7:0].
-3. Set addr[8:6] to the desired value, set bank_sel to 1, then pulse the clock line. The upper 3 address bits should be updated to the value of addr[8:6].
+3. Set addr[9:6] to the desired value, set bank_sel to 1, then pulse the clock line. The upper 4 address bits should be updated to the value of addr[9:6].
 
 ## External hardware
 
